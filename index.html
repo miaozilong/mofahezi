@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="description" content="小李家的魔法盒子">
+    <meta name="keywords" content="小李家的魔法盒子">
+    <meta name="robots" content="index, follow">
+    <title>小李家的魔法盒子</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            background-size: 100% 100%;
+            background-attachment: fixed;
+        }
+
+        @media screen and (orientation: portrait) {
+            /*竖屏 css*/
+            body{
+                background: url(freedom-v.jpg) no-repeat;
+                background-size: 100% 100%;
+                background-attachment: fixed;
+            }
+        }
+        @media screen and (orientation: landscape) {
+            /*横屏 css*/
+            body{
+                background: url(freedom-h.jpg) no-repeat;
+                background-size: 100% 100%;
+                background-attachment: fixed;
+            }
+        }
+
+        .box {
+            display: block;
+            position: fixed;
+            width: 180px;
+            top: 5%;
+            left: 50%;
+            margin-left: -128px; /* img宽度的一半*/
+            cursor: pointer;
+        }
+
+        .box > img {
+            width: 100%;
+        }
+
+        .container {
+            position: fixed;
+            left: 10px;
+            top: 10px;
+        }
+    </style>
+    <script>
+    </script>
+</head>
+<body>
+<div class="container">
+    <h1>小李家的魔法盒子</h1>
+    <h2>外企员工，在线创业</h2>
+    <h2>咨询请加QQ：2634644145</h2>
+    <div id="qq-box" class="box">
+        <img src="魔法盒子贴纸logo.png" alt="小李家的魔法盒子">
+    </div>
+</div>
+</body>
+</html>

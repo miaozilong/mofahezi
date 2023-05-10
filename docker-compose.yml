@@ -1,0 +1,7 @@
+web:
+  image: miaozilong/mofahezi:latest
+  ports:
+    - "80:80"
+  environment:
+    - NGINX_HOST=www.mofahezi.net
+    - NGINX_PORT=80
