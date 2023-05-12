@@ -25,16 +25,6 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/mofahezi:latest
-      - name: update image    # 更新镜像
-        uses: appleboy/ssh-action@v0.1.10
-        with:
-          host: ${{ secrets.SSH_IP }} #云服务器的ip
-          username: ${{ secrets.SSH_USERNAME }} #云服务器的用户名
-          password: ${{ secrets.SSH_PASSWORD }} #云服务器的密码
-          script: |
-            (docker stop $(docker ps -a |  grep "mofahezi*"  | awk '{print $1}') || true) &&
-            (docker rm -f $(docker ps -a |  grep "mofahezi*"  | awk '{print $1}') || true) &&
-            docker pull miaozilong/mofahezi:latest
       - name: copy docker-compose.yml
         uses: appleboy/scp-action@v0.1.4
         with:
@@ -53,4 +43,8 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }} #云服务器的密码
           script: |
             cd mofahezi &&
+            mkdir ssl -p &&
+            echo '${{ secrets.SSL_CRT }}' > ssl/www.mofahezi.net.crt &&
+            echo '${{ secrets.SSL_KEY }}' > ssl/www.mofahezi.net.key &&
+            docker-compose pull &&
             docker-compose up -d
