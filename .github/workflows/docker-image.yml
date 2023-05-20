@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+      - name: 生成压缩包和校验文件
+        run: cd update_package && chmod +x make_upgrade_tarball.sh && ./make_upgrade_tarball.sh
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
