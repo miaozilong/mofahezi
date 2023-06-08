@@ -1,10 +1,10 @@
-web:
-  image: miaozilong/mofahezi:latest
-  ports:
-    - "80:80"
-    - "443:443"
-  volumes:
-    - ./ssl:/usr/share/nginx/ssl
-  environment:
-    - NGINX_HOST=www.mofahezi.net
-    - NGINX_PORT="80 443"
+version: "3"
+services:
+  web:
+    image: miaozilong/mofahezi:latest
+    network_mode: "host"
+    volumes:
+      - ./ssl:/usr/share/nginx/ssl
+    environment:
+      - NGINX_HOST=www.mofahezi.net
+      - NGINX_PORT="80 443"
