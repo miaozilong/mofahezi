@@ -24,44 +24,23 @@
     </style>
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
     <script>
+        function downloadFile(url) {
+            try {
+                var elemIF = document.createElement("iframe");
+                elemIF.src = url;
+                elemIF.style.display = "none";
+                document.body.appendChild(elemIF);
+            } catch (e) {
+                alert('下载失败，请联系管理员')
+            }
+        }
+
         $(function () {
             $("#btn-download").on('click', () => {
                 let url = $('#url').val()
                 if (checkUrl(url)) {
                     console.log('格式正确')
-                    $("#btn-download").attr("disabled", true);
-                    let fileName = 'default.zip'
-                    fetch('/download',
-                        {
-                            method: "POST",
-                            body: JSON.stringify({url: url}),
-                            timeout: 5 * 60 * 1000
-                        }
-                    ).then(resp => {
-                        // 切割出文件名
-                        let fileNameEncode = resp.headers.get('content-disposition').split('filename=')[1]
-                        // 解码
-                        fileName = decodeURIComponent(fileNameEncode)
-                        console.log('fileName', fileName)
-                        return resp.blob()
-                    })
-                        .then(blob => {
-                            const url = window.URL.createObjectURL(blob);
-                            const a = document.createElement('a');
-                            a.style.display = 'none';
-                            a.href = url;
-                            // the filename you want
-                            a.download = fileName;
-                            document.body.appendChild(a);
-                            a.click();
-                            window.URL.revokeObjectURL(url);
-                            console.log('下载成功')
-                            $("#btn-download").attr("disabled", false);
-                        })
-                        .catch(() => {
-                            alert('下载失败，请联系管理员')
-                            $("#btn-download").attr("disabled", false);
-                        });
+                    downloadFile("/download?url=" + url)
                 } else {
                     alert('URL地址格式不对')
                 }
