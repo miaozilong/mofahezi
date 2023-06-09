@@ -40,7 +40,7 @@
                 let url = $('#url').val()
                 if (checkUrl(url)) {
                     console.log('格式正确')
-                    downloadFile("/download?url=" + url)
+                    window.open(url, "_blank")
                 } else {
                     alert('URL地址格式不对')
                 }
