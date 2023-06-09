@@ -34,7 +34,8 @@
                     fetch('/download',
                         {
                             method: "POST",
-                            body: JSON.stringify({url: url})
+                            body: JSON.stringify({url: url}),
+                            timeout: 5 * 60 * 1000
                         }
                     ).then(resp => {
                         // 切割出文件名
