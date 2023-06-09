@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="description" content="小李家的魔法盒子">
+    <meta name="keywords" content="小李家的魔法盒子">
+    <meta name="robots" content="index, follow">
+    <title>小李家的魔法盒子</title>
+    <style>
+        #url {
+            display: block;
+            width: 90%;
+            height: 30px;
+        }
+
+        #btn-download {
+            text-align: center;
+            margin-top: 20px;
+            width: 150px;
+            height: 30px;
+            font-size: 18px;
+        }
+    </style>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+    <script>
+        $(function () {
+            $("#btn-download").on('click', () => {
+                let url = $('#url').val()
+                if (checkUrl(url)) {
+                    console.log('格式正确')
+                    $("#btn-download").attr("disabled", true);
+                    let fileName = 'default.zip'
+                    fetch('/download',
+                        {
+                            method: "POST",
+                            body: JSON.stringify({url: url})
+                        }
+                    ).then(resp => {
+                        // 切割出文件名
+                        let fileNameEncode = resp.headers.get('content-disposition').split('filename=')[1]
+                        // 解码
+                        fileName = decodeURIComponent(fileNameEncode)
+                        console.log('fileName', fileName)
+                        return resp.blob()
+                    })
+                        .then(blob => {
+                            const url = window.URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.style.display = 'none';
+                            a.href = url;
+                            // the filename you want
+                            a.download = fileName;
+                            document.body.appendChild(a);
+                            a.click();
+                            window.URL.revokeObjectURL(url);
+                            console.log('下载成功')
+                            $("#btn-download").attr("disabled", false);
+                        })
+                        .catch(() => {
+                            alert('下载失败，请联系管理员')
+                            $("#btn-download").attr("disabled", false);
+                        });
+                } else {
+                    alert('URL地址格式不对')
+                }
+            })
+        })
+
+        function checkUrl(url) {
+            let ret
+            let isUrl = /^(?:(http|https|ftp):\/\/)?((|[\w-]+\.)+[a-z0-9]+)(?:(\/[^/?#]+)*)?(\?[^#]+)?(#.+)?$/i.test(url);
+            let isGithub = url.search("github.com") != -1;
+            ret = isUrl && isGithub
+            return ret
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h1>请输入github的URL地址后，点击下载按钮，几秒后将开始下载</h1>
+    <input type="text" name="url" id="url" placeholder="https://github.com/miaozilong/demo">
+    <button id="btn-download">下载</button>
+</div>
+</body>
+</html>
