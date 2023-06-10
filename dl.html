@@ -44,7 +44,8 @@
                     $("#btn-download").attr('disabled', true)
                     jQuery.ajax(downloadReqUrl, {
                         data: {
-                            url: url
+                            url: url,
+                            orderId: $.getUrlParam('orderId')
                         },
                         dataType: "json",
                         success: function (data) {
