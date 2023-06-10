@@ -40,8 +40,24 @@
                 let url = $('#url').val()
                 if (checkUrl(url)) {
                     console.log('格式正确')
-                    let downloadUrl = "/download?url=" + url;
-                    downloadFile(downloadUrl)
+                    let downloadReqUrl = "/downloadReq";
+                    $("#btn-download").attr('disabled', true)
+                    jQuery.ajax(downloadReqUrl, {
+                        data: {
+                            url: url
+                        },
+                        dataType: "json",
+                        success: function (data) {
+                            console.log("开始下载")
+                            downloadFile("/downloadFile?filePath=" + data.filePath)
+                        },
+                        error: function () {
+                            alert("下载失败，请联系管理员")
+                        },
+                        complete: function () {
+                            $("#btn-download").attr('disabled', false)
+                        }
+                    })
                 } else {
                     alert('URL地址为空或者格式不合法')
                 }
