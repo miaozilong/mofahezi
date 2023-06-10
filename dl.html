@@ -40,7 +40,7 @@
                 let url = $('#url').val()
                 if (checkUrl(url)) {
                     console.log('格式正确')
-                    let downloadReqUrl = "/downloadReq";
+                    let downloadReqUrl = "/download/downloadReq";
                     $("#btn-download").attr('disabled', true)
                     jQuery.ajax(downloadReqUrl, {
                         data: {
@@ -49,7 +49,7 @@
                         dataType: "json",
                         success: function (data) {
                             console.log("开始下载")
-                            downloadFile("/downloadFile?filePath=" + data.filePath)
+                            downloadFile("/download/downloadFile?filePath=" + data.filePath)
                         },
                         error: function () {
                             alert("下载失败，请联系管理员")
