@@ -6,5 +6,5 @@ services:
     volumes:
       - ./ssl:/usr/share/nginx/ssl
     environment:
-      - NGINX_HOST=www.mofahezi.net
+      - NGINX_HOST=www.xiaolimofahezi.com
       - NGINX_PORT="80 443"

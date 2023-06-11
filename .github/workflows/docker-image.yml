@@ -46,7 +46,7 @@ jobs:
           script: |
             cd mofahezi &&
             mkdir ssl -p &&
-            echo '${{ secrets.SSL_CRT }}' > ssl/www.mofahezi.net.crt &&
-            echo '${{ secrets.SSL_KEY }}' > ssl/www.mofahezi.net.key &&
+            echo '${{ secrets.SSL_CRT }}' > ssl/www.xiaolimofahezi.com.crt &&
+            echo '${{ secrets.SSL_KEY }}' > ssl/www.xiaolimofahezi.com.key &&
             docker-compose pull &&
             docker-compose up -d
