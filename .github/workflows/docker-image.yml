@@ -42,9 +42,10 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }} #云服务器的用户名
           password: ${{ secrets.SSH_PASSWORD }} #云服务器的密码
           script: |
-            cd mofahezi &&
-            mkdir ssl -p &&
-            echo '${{ secrets.SSL_CRT }}' > ssl/www.xiaolimofahezi.com.crt &&
-            echo '${{ secrets.SSL_KEY }}' > ssl/www.xiaolimofahezi.com.key &&
-            docker-compose pull &&
+            cd mofahezi
+            mkdir ssl -p
+            echo '${{ secrets.SSL_CRT }}' > ssl/www.xiaolimofahezi.com.crt
+            echo '${{ secrets.SSL_KEY }}' > ssl/www.xiaolimofahezi.com.key
+            docker-compose pull
+            docker image prune -f
             docker-compose up -d
