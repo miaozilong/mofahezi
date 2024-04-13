@@ -3,8 +3,3 @@ services:
   web:
     image: miaozilong/mofahezi:latest
     network_mode: "host"
-    volumes:
-      - ./ssl:/usr/share/nginx/ssl
-    environment:
-      - NGINX_HOST=www.xiaolimofahezi.com
-      - NGINX_PORT="80 443"
