@@ -60,6 +60,7 @@
             position: fixed;
             left: 10px;
             top: 10px;
+            color: white;
         }
 
         .beian {
@@ -67,6 +68,21 @@
             text-align: center;
             bottom: 5px;
             width: 100%;
+        }
+
+        .container a {
+            color: white
+        }
+
+        .talk-img {
+            width: 30px;
+            font-size: 0;
+            position: relative;
+            top: 5px;
+            left: 10px;
+        }
+        .friend{
+            margin-top: 10px;
         }
     </style>
     <script>
@@ -77,10 +93,14 @@
 <div class="container">
     <h1>小李家的魔法盒子</h1>
     <h2>外企员工，在线创业</h2>
-<!--    <h2>咨询请加QQ：2634644145</h2>-->
-<!--    <div id="qq-box" class="box">-->
-<!--        <img src="魔法盒子贴纸logo.png" alt="小李家的魔法盒子">-->
-<!--    </div>-->
+    <a href="tencent://message/?uin=2634644145&Site=&Menu=yes">
+        <h2>QQ客服：2634644145<img class="talk-img" src="QQ.svg" alt="QQ" title="点我聊天（QQ）"></h2>
+    </a>
+
+    <h2 class="friend">交个朋友，15天免费试用，包往返运费</h2>
+    <div id="qq-box" class="box">
+        <img src="魔法盒子贴纸logo.png" alt="小李家的魔法盒子">
+    </div>
 </div>
 <div class="beian">
     <div class="gxbeian">
@@ -90,7 +110,11 @@
     </div>
     <div style="width:300px;margin:0 auto; padding:20px 0;">
         <img src="公安备案图标.png" alt="公安备案图标">
-        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32068202000392" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="" style="float:left;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">苏公网安备 32068202000392号</p></a>
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32068202000392"
+           style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src=""
+                                                                                                style="float:left;"/>
+            <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">苏公网安备
+                32068202000392号</p></a>
     </div>
 </div>
 </body>
